@@ -25,7 +25,7 @@ function View:move_towards(t, k, dest, rate)
   if math.abs(val - dest) < 0.5 then
     t[k] = dest
   else
-    t[k] = common.lerp(val, dest, rate or 0.5)
+    t[k] = common.lerp(val, dest, rate or config.animation_speed)
   end
   if val ~= dest then
     core.redraw = true
@@ -124,8 +124,8 @@ end
 
 function View:update()
   self:clamp_scroll_position()
-  self:move_towards(self.scroll, "x", self.scroll.to.x, 0.3)
-  self:move_towards(self.scroll, "y", self.scroll.to.y, 0.3)
+  self:move_towards(self.scroll, "x", self.scroll.to.x, config.scroll_speed)
+  self:move_towards(self.scroll, "y", self.scroll.to.y, config.scroll_speed)
 end
 
 
