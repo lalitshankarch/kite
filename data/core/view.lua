@@ -12,6 +12,7 @@ function View:new()
   self.position = { x = 0, y = 0 }
   self.size = { x = 0, y = 0 }
   self.scroll = { x = 0, y = 0, to = { x = 0, y = 0 } }
+  self.scrollbar_width = style.scrollbar_unfocus_width
   self.cursor = "arrow"
   self.scrollable = false
 end
@@ -55,9 +56,9 @@ function View:get_scrollbar_rect()
   end
   local h = math.max(20, self.size.y * self.size.y / sz)
   return
-    self.position.x + self.size.x - style.scrollbar_size,
+    self.position.x + self.size.x - self.scrollbar_width,
     self.position.y + self.scroll.y * (self.size.y - h) / (sz - self.size.y),
-    style.scrollbar_size,
+    self.scrollbar_width,
     h
 end
 
@@ -140,6 +141,11 @@ function View:draw_scrollbar()
   local x, y, w, h = self:get_scrollbar_rect()
   local highlight = self.hovered_scrollbar or self.dragging_scrollbar
   local color = highlight and style.scrollbar2 or style.scrollbar
+  if highlight then
+    self:move_towards("scrollbar_width", style.scrollbar_focus_width)
+  else
+    self:move_towards("scrollbar_width", style.scrollbar_unfocus_width)
+  end
   renderer.draw_rect(x, y, w, h, color)
 end
 

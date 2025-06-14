@@ -3,7 +3,8 @@ local style = {}
 
 style.padding = { x = common.round(14 * SCALE), y = common.round(7 * SCALE) }
 style.divider_size = common.round(1 * SCALE)
-style.scrollbar_size = common.round(12 * SCALE)
+style.scrollbar_unfocus_width = common.round(6 * SCALE)
+style.scrollbar_focus_width = common.round(16 * SCALE)
 style.caret_width = common.round(2 * SCALE)
 style.tab_width = common.round(170 * SCALE)
 
