@@ -37,13 +37,13 @@ static int f_get_size(lua_State *L) {
 }
 
 
-static int f_begin_frame(lua_State *L) {
+static int f_begin_frame() {
   rencache_begin_frame();
   return 0;
 }
 
 
-static int f_end_frame(lua_State *L) {
+static int f_end_frame() {
   rencache_end_frame();
   return 0;
 }
