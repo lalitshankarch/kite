@@ -1,4 +1,5 @@
 local core = require "core"
+local config = require "core.config"
 local style = require "core.style"
 local View = require "core.view"
 
@@ -10,12 +11,28 @@ function LogView:new()
   LogView.super.new(self)
   self.last_item = core.log_items[#core.log_items]
   self.scrollable = true
+  self.font = "font"
   self.yoffset = 0
 end
 
 
 function LogView:get_name()
   return "Log"
+end
+
+
+function LogView:get_scrollable_size()
+  return self:get_line_height() * (#core.log_items - 1) + self.size.y
+end
+
+
+function LogView:get_font()
+  return style[self.font]
+end
+
+
+function LogView:get_line_height()
+  return style.font:get_height() + style.padding.y
 end
 
 
@@ -68,6 +85,8 @@ function LogView:draw()
     end
     y = y + style.padding.y
   end
+
+  self:draw_scrollbar()
 end
 
 
